@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Attaches React components to the DOM
 ReactDOM.render(
   <React.StrictMode>
     <App />
