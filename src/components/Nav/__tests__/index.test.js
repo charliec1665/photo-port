@@ -9,6 +9,8 @@ const categories = [
 ]
 const mockCurrentCategory = jest.fn();
 const mockSetCurrentCategory = jest.fn();
+const mockContactSelected = jest.fn();
+const mockSetContactSelected = jest.fn();
 
 // after each test this ensures no leftover memory data to give false results
 afterEach(cleanup);
@@ -21,6 +23,8 @@ describe('Nav component', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
     });
         
@@ -31,6 +35,8 @@ describe('Nav component', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
         // assert value comparison with jest-dom matcher
         expect(asFragment()).toMatchSnapshot();
@@ -45,6 +51,8 @@ describe('emoji is visible', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
         // assert element with label 'camera' to have certain content using jest-dom matcher
         expect(getByLabelText('camera')).toHaveTextContent('📸');
@@ -59,6 +67,8 @@ describe('links are visible', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
         // assert valid matches of elements using jest-dom matcher
         expect(getByTestId('link')).toHaveTextContent('Oh Snap!');
