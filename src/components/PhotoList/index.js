@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import Modal from '../Modal'
 
 const PhotoList = ({category}) => {
+
+    // Hook to manage modal state
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [photos] = useState([
         {
@@ -103,19 +107,30 @@ const PhotoList = ({category}) => {
     // going through each photo in photos array, every photo that matches the 'category' is returned in an array assigned currentPhotos
       const currentPhotos = photos.filter((photo) => photo.category === category);
 
+    // declare props for image and index data for modal to render
+    const [currentPhoto, setCurrentPhoto] = useState();
+
+    // function to use Hook to manage the state of the current photo
+    const toggleModal = (image, i) => {
+        setCurrentPhoto({...image, index: i});
+        setIsModalOpen(true);
+    }
+
       return (
         <div>
-          <div className="flex-row">
-            {/* mapping currentPhotos array to render each photo that matches selected category */}
-            {currentPhotos.map((image, i) => (
-              <img
-                src={require(`../../assets/small/${category}/${i}.jpg`)}
-                alt={image.name}
-                className="img-thumbnail mx-1"
-                key={image.name}
-              />
-            ))}
-          </div>
+            {isModalOpen && <Modal currentPhoto={currentPhoto} />}
+            <div className="flex-row">
+                {/* mapping currentPhotos array to render each photo that matches selected category */}
+                {currentPhotos.map((image, i) => (
+                    <img
+                        src={require(`../../assets/small/${category}/${i}.jpg`)}
+                        alt={image.name}
+                        className="img-thumbnail mx-1"
+                        onClick={() => toggleModal(image, i)}
+                        key={image.name}
+                    />
+                ))}
+            </div>
         </div>
       );
 }
