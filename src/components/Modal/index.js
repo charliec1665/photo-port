@@ -1,7 +1,7 @@
 import React from 'react'
 
 // destructuring the props in PhotoList into currentPhoto here in the parameter
-function Modal({currentPhoto}) {
+function Modal({onClose, currentPhoto}) {
     // destructure currentPhoto properties into constants to assign values in the modal
     const {name, category, description, index} = currentPhoto;
 
@@ -12,7 +12,7 @@ function Modal({currentPhoto}) {
                 <h3 className='modalTitle'>{name}</h3>
                 <img src={require(`../../assets/large/${category}/${index}.jpg`)} alt='current category' />
                 <p>{description}</p>
-                <button type='button'>
+                <button type='button' onClick={onClose}>
                     Close this modal
                 </button>
             </div>

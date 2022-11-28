@@ -113,12 +113,14 @@ const PhotoList = ({category}) => {
     // function to use Hook to manage the state of the current photo
     const toggleModal = (image, i) => {
         setCurrentPhoto({...image, index: i});
-        setIsModalOpen(true);
+        setIsModalOpen(!isModalOpen);
     }
 
       return (
         <div>
-            {isModalOpen && <Modal currentPhoto={currentPhoto} />}
+            {isModalOpen && (
+                <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
+            )}
             <div className="flex-row">
                 {/* mapping currentPhotos array to render each photo that matches selected category */}
                 {currentPhotos.map((image, i) => (
