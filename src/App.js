@@ -9,6 +9,9 @@ import ContactForm from './components/Contact';
   // we need to modify this file or add components inside it.
 
 function App() {
+  // Hook to conditionally render selected page
+  const [contactSelected, setContactSelected] = useState(false);
+
   const [categories] = useState([
     {
       name: 'commercial',
@@ -31,11 +34,21 @@ function App() {
       <Nav categories={categories}
       setCurrentCategory={setCurrentCategory}
       currentCategory={currentCategory}
+      contactSelected={contactSelected}
+      setContactSelected={setContactSelected}
       ></Nav>
       <main>
-        <ContactForm></ContactForm>
-        <Gallery currentCategory={currentCategory}></Gallery>
-        <About></About>
+        {/* (ternary operator ? :) if no contactSelected then render the gallery and about components */}
+        {!contactSelected ? (
+          // react fragments - allow multiple elements to be grouped together
+          <>
+            <Gallery currentCategory={currentCategory}></Gallery>
+            <About></About>
+          </>
+        ) : (
+          // else render contact form
+          <ContactForm></ContactForm>
+        )}
       </main>
     </div>
   );
